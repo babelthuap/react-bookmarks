@@ -5,7 +5,6 @@ import Form from "./Form";
 class List extends React.Component {
   constructor(props){
     super(props);
-    console.log("props", this.props)
 
     this.state = { 
       data: [
@@ -27,6 +26,14 @@ class List extends React.Component {
     this.setState({data: newData});
   }
 
+  deleteBookmark(e){
+    e.preventDefault();
+
+    let newData = this.state.data.filter(bookmark => bookmark.createdAt !== Number(e.target.id));
+
+    this.setState({data: newData});
+  }
+
   render() {
     let data = this.state.data;
     let sortBy = this.state.sortBy
@@ -40,7 +47,8 @@ class List extends React.Component {
         <SortBy changeSortBy={this.changeSortBy.bind(this)} />
         <ul>
           { data.map((bookmark, index)=> {
-            return ( <li key={index}><a href={bookmark.url}>{bookmark.title}</a></li> ) })
+            return ( <li key={index}><a href={bookmark.url}>{bookmark.title}</a> 
+              &nbsp;<button id={bookmark.createdAt} key={index} onClick={this.deleteBookmark.bind(this)}>Delete</button></li> ) })
           }
         </ul>
         <div>Total: {data.length}</div>
