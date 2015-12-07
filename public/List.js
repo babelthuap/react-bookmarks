@@ -17,9 +17,21 @@ class List extends React.Component {
     };
   }
 
-  sortText(e){
-    console.log("event", e.target.value)
-    this.setState({ sortBy: e.target.value })
+  changeSortBy(e){
+    e.preventDefault();
+    this.setState({ sortBy: e.target.value });
+  }
+
+  addBookmark(e){
+    e.preventDefault();
+
+    let newBookmark = {
+      createdAt: Date.now(), 
+      title: e.target[0].value,
+      url: e.target[1].value
+    };
+    let newData = this.state.data.concat(newBookmark);
+    this.setState({data: newData});
   }
 
   render() {
@@ -28,14 +40,14 @@ class List extends React.Component {
 
     return (
       <div>
-        <SortBy sortText={this.sortText.bind(this)} />
+        <SortBy changeSortBy={this.changeSortBy.bind(this)} />
         <ul>
           { data.map((bookmark, index)=> {
             return ( <li key={index}><a href={bookmark.url}>{bookmark.title}</a></li> ) })
           }
         </ul>
         <div>Total: {data.length}</div>
-        <Form />
+        <Form addBookmark={this.addBookmark.bind(this)}/>
       </div>
     );
   }

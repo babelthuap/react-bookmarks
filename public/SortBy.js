@@ -5,8 +5,8 @@ class SortBy extends React.Component {
     return (
       <div>
         <span>Sort By: </span>
-        <button className="btn btn-default" value="createdAt" onClick={this.props.sortText} >Date Added</button>
-        <button className="btn btn-default" value="title" onClick={this.props.sortText} >Title</button>
+        <button className="btn btn-default" value="createdAt" onClick={this.props.changeSortBy} >Date Added</button>
+        <button className="btn btn-default" value="title" onClick={this.props.changeSortBy} >Title</button>
       </div>
     );
   }

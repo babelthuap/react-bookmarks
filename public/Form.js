@@ -3,9 +3,9 @@ import React from "react";
 class Form extends React.Component {
   render() {
     return (
-      <form>
-        <input type="text" placeholder="Title" required />
-        <input type="url" placeholder="URL" required />
+      <form onSubmit={this.props.addBookmark}>
+        <input type="text" name="title" placeholder="Title"/>
+        <input type="url" name="url" placeholder="URL"  />
         <button className="btn btn-default" type="submit">Add Bookmark</button>
       </form>
     );
