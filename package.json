@@ -1,12 +1,13 @@
 {
-  "name": "plunk",
+  "name": "Reactive Bookmarks",
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack && node server.js"
+    "setup": "npm install && webpack",
+    "start": "webpack && node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Asami Kawamoto and Nicholas Neumann-Chun",
   "license": "ISC",
   "dependencies": {
     "babel": "^6.3.13",
@@ -27,5 +28,5 @@
     "url": "https://github.com/babelthuap/react-bookmarks/issues"
   },
   "homepage": "https://github.com/babelthuap/react-bookmarks#readme",
-  "description": ""
+  "description": "a simple bookmarks list written in React"
 }
