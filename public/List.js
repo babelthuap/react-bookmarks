@@ -22,14 +22,7 @@ class List extends React.Component {
     this.setState({ sortBy: e.target.value });
   }
 
-  addBookmark(e){
-    e.preventDefault();
-
-    let newBookmark = {
-      createdAt: Date.now(), 
-      title: e.target[0].value,
-      url: e.target[1].value
-    };
+  addBookmark(newBookmark){
     let newData = this.state.data.concat(newBookmark);
     this.setState({data: newData});
   }
