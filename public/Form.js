@@ -18,8 +18,8 @@ class Form extends React.Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit.bind(this)}>
-        <input type="text" placeholder="Title" ref="title"/>
-        <input type="url" placeholder="URL" ref="url" />
+        <input type="text" placeholder="Title" ref="title" required />&nbsp;
+        <input type="url" placeholder="URL" ref="url" required />&nbsp;
         <button className="btn btn-default" type="submit">Add Bookmark</button>
       </form>
     );

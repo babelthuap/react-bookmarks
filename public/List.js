@@ -8,9 +8,9 @@ class List extends React.Component {
 
     this.state = { 
       data: [
-        {"createdAt": 1449445720407, "title": "CIse Jingu", "url":"http://www.isejingu.or.jp/english/" },
-        {"createdAt": 1449445818815, "title": "BKumano Kodo", "url":"http://www.tb-kumano.jp/en/kumano-kodo/#overview" },
-        {"createdAt": 1449445829857, "title": "Takachiho", "url":"http://www.jnto.go.jp/eng/location/regional/miyazaki/takachiho.html" }
+        {"createdAt": 1449445818815, "title": "Ise Jingu", "url":"http://www.isejingu.or.jp/english/" },
+        {"createdAt": 1449445829857, "title": "Kumano Kodo", "url":"http://www.tb-kumano.jp/en/kumano-kodo/#overview" },
+        {"createdAt": 1449445720407, "title": "Takachiho", "url":"http://www.jnto.go.jp/eng/location/regional/miyazaki/takachiho.html" }
       ],
       sortBy: "createdAt"  
     };
@@ -26,11 +26,9 @@ class List extends React.Component {
     this.setState({data: newData});
   }
 
-  deleteBookmark(e){
+  deleteBookmark(createdAt, e){
     e.preventDefault();
-
-    let newData = this.state.data.filter(bookmark => bookmark.createdAt !== Number(e.target.id));
-
+    let newData = this.state.data.filter(bookmark => bookmark.createdAt !== createdAt);
     this.setState({data: newData});
   }
 
@@ -46,12 +44,21 @@ class List extends React.Component {
       <div>
         <SortBy changeSortBy={this.changeSortBy.bind(this)} />
         <ul>
-          { data.map((bookmark, index)=> {
-            return ( <li key={index}><a href={bookmark.url}>{bookmark.title}</a> 
-              &nbsp;<button id={bookmark.createdAt} key={index} onClick={this.deleteBookmark.bind(this)}>Delete</button></li> ) })
+          {
+            data.map((bookmark, index) => {
+              return <li key={index}>
+                       <a href={bookmark.url} target="_blank">{bookmark.title}</a> 
+                       &nbsp;
+                       <button id={bookmark.createdAt}
+                               className="fa fa-trash"
+                               onClick={this.deleteBookmark.bind(this, bookmark.createdAt)}>
+                       </button>
+                     </li>
+            })
           }
         </ul>
-        <div>Total: {data.length}</div>
+        <div><em>Total: {data.length}</em></div>
+        <hr />
         <Form addBookmark={this.addBookmark.bind(this)}/>
       </div>
     );
