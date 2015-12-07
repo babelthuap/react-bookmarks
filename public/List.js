@@ -34,29 +34,26 @@ class List extends React.Component {
 
   render() {
     let data = this.state.data;
-    let sortBy = this.state.sortBy
-    data.sort((a, b) => {
-      let type = typeof a[sortBy];
-      return (type === "string" ? a[sortBy].toLowerCase() : a[sortBy]) >
-             (type === "string" ? b[sortBy].toLowerCase() : b[sortBy]);
+    let sortBy = this.state.sortBy;
+    if (sortBy === "title") {
+      data.sort((a, b) => a[sortBy].toLowerCase() > b[sortBy].toLowerCase());
+    } else {
+      data.sort((a, b) => a[sortBy] > b[sortBy]);
+    }
+    let bookmarksAsLis = data.map((bookmark, index) => {
+      return <li key={index}>
+               <a href={bookmark.url} target="_blank">{bookmark.title}</a> 
+               &nbsp;
+               <button id={bookmark.createdAt}
+                       className="fa fa-trash"
+                       onClick={this.deleteBookmark.bind(this, bookmark.createdAt)}>
+               </button>
+             </li>
     });
     return (
       <div>
         <SortBy changeSortBy={this.changeSortBy.bind(this)} />
-        <ul>
-          {
-            data.map((bookmark, index) => {
-              return <li key={index}>
-                       <a href={bookmark.url} target="_blank">{bookmark.title}</a> 
-                       &nbsp;
-                       <button id={bookmark.createdAt}
-                               className="fa fa-trash"
-                               onClick={this.deleteBookmark.bind(this, bookmark.createdAt)}>
-                       </button>
-                     </li>
-            })
-          }
-        </ul>
+        <ul>{bookmarksAsLis}</ul>
         <div><em>Total: {data.length}</em></div>
         <hr />
         <Form addBookmark={this.addBookmark.bind(this)}/>
