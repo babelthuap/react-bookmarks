@@ -29,8 +29,12 @@ class List extends React.Component {
 
   render() {
     let data = this.state.data;
-    data.sort((a, b) => a[this.state.sortBy] > b[this.state.sortBy]);
-
+    let sortBy = this.state.sortBy
+    data.sort((a, b) => {
+      let type = typeof a[sortBy];
+      return (type === "string" ? a[sortBy].toLowerCase() : a[sortBy]) >
+             (type === "string" ? b[sortBy].toLowerCase() : b[sortBy]);
+    });
     return (
       <div>
         <SortBy changeSortBy={this.changeSortBy.bind(this)} />
